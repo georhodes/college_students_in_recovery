@@ -1,0 +1,598 @@
+---
+title: "CCHP-Students in Recovery"
+author: "George Rhodes"
+date: "4/22/2019"
+output: pdf_document
+---
+
+# p < 0.05:
+## AHQ 7, AHQ 9, ~AHQ 10, ATOB1, AMTFMJ1, AMTFMJ5/AMTF5, AHIGH1, AHIGH2, AMHQ1
+## AGAD1, APHQ2, ASERVICES1, ~ASERVICES7, 
+```{r, echo = FALSE}
+#packages
+library("gmodels")
+library("dplyr")
+
+#import data
+data157 <- read.csv("~/Documents/School/UW/MSW/506/research/Rcsrad/Rcsrad/CCHPdata157.csv")
+```
+
+# Demographics
+## race, 0=caucasion, 1= other
+```{r, echo = FALSE}
+datadirace <- data157 %>%
+  dplyr::select(ARECOVERY, ARACE) %>%
+   na.omit(ARECOVERY, ARACE) %>%
+    mutate (race= ifelse(ARACE==5, 0, 1))
+CrossTable(datadirace$ARECOVERY, datadirace$race, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+
+CrossTable(data157$ARECOVERY, data157$AREASONS3)
+```
+\pagebreak
+
+  ##Gender: 0=male, 1=female. For statistical analysis, excluded 13 trans identified respondants.
+```{r, echo = FALSE}
+# chitest_arace <- chisq.test(datadirace$ARECOVERY, datadirace$race, correct=FALSE)
+# chitest_arace
+# 
+# chitest_ASEX <- chisq.test(data157$ARECOVERY, data157$ASEX, correct=TRUE)
+# chitest_ASEX
+# 
+datadiagender <- data157 %>%
+dplyr::select(ARECOVERY, AGENDER) %>%
+  filter(AGENDER <=1) %>%
+  na.omit(ARECOVERY, AGENDER)
+CrossTable(datadiagender$ARECOVERY, datadiagender$AGENDER, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+
+datadiasex <- data157 %>%
+dplyr::select(ARECOVERY, ABIRTHSEX) %>%
+  na.omit(ARECOVERY, ABIRTHSEX)
+CrossTable(datadiasex$ARECOVERY, datadiasex$ABIRTHSEX, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+
+
+# 
+# chitest_AETHNIC <- chisq.test(data157$ARECOVERY, data157$AETHNIC, correct=FALSE)
+# chitest_AETHNIC
+# 
+# chitest_AEDSTATUS <- chisq.test(data157$ARECOVERY, data157$AEDSTATUS, correct=TRUE)
+# chitest_AEDSTATUS
+# 
+# chitest_AWORK <- chisq.test(data157$ARECOVERY, data157$AWORK, correct=TRUE)
+# chitest_AWORK
+# 
+# chitest_ARELATION <- chisq.test(data157$ARECOVERY, data157$ARELATION, correct=TRUE)
+# chitest_ARELATION
+# 
+# chitest_APARENT <- chisq.test(data157$ARECOVERY, data157$APARENT, correct=TRUE)
+# chitest_APARENT
+# #SIGNIFICANT
+# 
+# chitest_AEDSTATUS <- chisq.test(data157$ARECOVERY, data157$AEDSTATUS, correct=TRUE)
+# chitest_AEDSTATUS
+# 
+# chitest_AEDSTATUS <- chisq.test(data157$ARECOVERY, data157$AEDSTATUS, correct=TRUE)
+# chitest_AEDSTATUS
+```
+
+\pagebreak
+#Physical Health
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq1 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ1) %>%
+  na.omit(ARECOVERY, AHQ1) %>%
+  mutate (ahq1= ifelse(AHQ1==0, 0, 1))
+CrossTable(datadiahq1$ARECOVERY, datadiahq1$ahq1, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+
+datadiahq2 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ2) %>%
+  na.omit(ARECOVERY, AHQ2) %>%
+  mutate (ahq2= ifelse(AHQ2==0, 0, 1))
+CrossTable(datadiahq2$ARECOVERY, datadiahq2$ahq2, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq3 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ3) %>%
+  na.omit(ARECOVERY, AHQ3) %>%
+  mutate (ahq3= ifelse(AHQ3==0, 0, 1))
+CrossTable(datadiahq3$ARECOVERY, datadiahq3$ahq3, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq4 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ4) %>%
+  na.omit(ARECOVERY, AHQ4) %>%
+  mutate (ahq4= ifelse(AHQ4==0, 0, 1))
+CrossTable(datadiahq4$ARECOVERY, datadiahq4$ahq4, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq5 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ5) %>%
+  na.omit(ARECOVERY, AHQ5) %>%
+  mutate (ahq5= ifelse(AHQ5==0, 0, 1))
+CrossTable(datadiahq5$ARECOVERY, datadiahq5$ahq5, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq6 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ6) %>%
+  na.omit(ARECOVERY, AHQ6) %>%
+  mutate (ahq6= ifelse(AHQ6==0, 0, 1))
+CrossTable(datadiahq6$ARECOVERY, datadiahq6$ahq6, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq7 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ7) %>%
+  na.omit(ARECOVERY, AHQ7) %>%
+  mutate (ahq7= ifelse(AHQ7==0, 0, 1))
+CrossTable(datadiahq7$ARECOVERY, datadiahq7$ahq7, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq8 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ8) %>%
+  na.omit(ARECOVERY, AHQ8) %>%
+  mutate (ahq8= ifelse(AHQ8==0, 0, 1))
+CrossTable(datadiahq8$ARECOVERY, datadiahq8$ahq8, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq9 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ9) %>%
+  na.omit(ARECOVERY, AHQ9) %>%
+  mutate (ahq9= ifelse(AHQ9==0, 0, 1))
+CrossTable(datadiahq9$ARECOVERY, datadiahq9$ahq9, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq10 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ10) %>%
+  na.omit(ARECOVERY, AHQ10) %>%
+  mutate (ahq10= ifelse(AHQ10==0, 0, 1))
+CrossTable(datadiahq10$ARECOVERY, datadiahq10$ahq10, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq11 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ11) %>%
+  na.omit(ARECOVERY, AHQ11) %>%
+  mutate (ahq11= ifelse(AHQ11==0, 0, 1))
+CrossTable(datadiahq11$ARECOVERY, datadiahq11$ahq11, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq12 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ12) %>%
+  na.omit(ARECOVERY, AHQ12) %>%
+  mutate (ahq12= ifelse(AHQ12==0, 0, 1))
+CrossTable(datadiahq12$ARECOVERY, datadiahq12$ahq12, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq13 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ13) %>%
+  na.omit(ARECOVERY, AHQ13) %>%
+  mutate (ahq13= ifelse(AHQ13==0, 0, 1))
+CrossTable(datadiahq13$ARECOVERY, datadiahq13$ahq13, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+##1-14: make dicotomous 0=0 or 1=1+ days. 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq14 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ14) %>%
+  na.omit(ARECOVERY, AHQ14) %>%
+  mutate (ahq14= ifelse(AHQ14==0, 0, 1))
+CrossTable(datadiahq14$ARECOVERY, datadiahq14$ahq14, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+## 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq15 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ15) %>%
+  na.omit(ARECOVERY, AHQ15) %>%
+  mutate (ahq15= ifelse(AHQ15 <= 3, 0, 1))
+CrossTable(datadiahq15$ARECOVERY, datadiahq15$ahq15, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+## 15-16: good-excellent <= 3, fair-poor >=4
+```{r, echo = FALSE}
+datadiahq16 <- data157 %>%
+  dplyr::select(ARECOVERY, AHQ16) %>%
+  na.omit(ARECOVERY, AHQ16) %>%
+  mutate (ahq16= ifelse(AHQ16 <= 3, 0, 1))
+CrossTable(datadiahq16$ARECOVERY, datadiahq16$ahq16, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+# CIGARETTES
+## ever smoked: 0 <= occasionally, 1>= regularly
+```{r, echo = FALSE}
+datadiatob1 <- data157 %>%
+  dplyr::select(ARECOVERY, ATOB1) %>%
+  na.omit(ARECOVERY, ATOB1) %>%
+  mutate (atob1= ifelse(ATOB1 <= 2, 0, 1))
+CrossTable(datadiatob1$ARECOVERY, datadiatob1$atob1, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+
+#Mosaic
+mosaic_atob1 <- datadiatob1 %>% #KEY POPULATION
+  select(ARECOVERY, atob1)   #Key VARIABLES
+mosaicplot(table(mosaic_atob1), shade = TRUE, las = 4)
+```
+
+\pagebreak
+## Last 30 days: 0= less than 1 per day, 1= more than 1 per day
+```{r, echo = FALSE}
+datadiatob2 <- data157 %>%
+  dplyr::select(ARECOVERY, ATOB2) %>%
+  na.omit(ARECOVERY, ATOB2) %>%
+  mutate (atob2= ifelse(ATOB2 <= 1, 0, 1))
+CrossTable(datadiatob2$ARECOVERY, datadiatob2$atob2, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+# MARIJUANA 
+## ever in lifetime: 0 = no, 1= yes
+```{r, echo = FALSE}
+datadiamtfmj1 <- data157 %>%
+  dplyr::select(ARECOVERY, AMTFMJ1) %>%
+  na.omit(ARECOVERY, AMTFMJ1) %>%
+  mutate (amtfmj1= ifelse(AMTFMJ1 == 1, 0, 1))
+CrossTable(datadiamtfmj1$ARECOVERY, datadiamtfmj1$amtfmj1, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+## last year: 0= no, 1= yes
+```{r, echo = FALSE}
+datadiamtfmj2 <- data157 %>%
+  dplyr::select(ARECOVERY, AMTFMJ2) %>%
+  na.omit(ARECOVERY, AMTFMJ2) %>%
+  mutate (amtfmj2= ifelse(AMTFMJ2 == 1, 0, 1))
+CrossTable(datadiamtfmj2$ARECOVERY, datadiamtfmj2$amtfmj2, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+## past 30 days: 0 = no, 1 = yes
+```{r, echo = FALSE}
+datadiamtfmj3 <- data157 %>%
+  dplyr::select(ARECOVERY, AMTFMJ3) %>%
+  na.omit(ARECOVERY, AMTFMJ3) %>%
+  mutate (amtfmj3= ifelse(AMTFMJ3 == 1, 0, 1))
+CrossTable(datadiamtfmj3$ARECOVERY, datadiamtfmj3$amtfmj3, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+## Ever in your life combined alcohol and MJ: 0 = no, 1 = yes
+```{r, echo = FALSE}
+datadiamtf5 <- data157 %>%
+  dplyr::select(ARECOVERY, AMTF5) %>%
+  na.omit(ARECOVERY, AMTF5) %>%
+  mutate (amtf5= ifelse(AMTF5 == 1, 0, 1))
+CrossTable(datadiamtf5$ARECOVERY, datadiamtf5$amtf5, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+## Ever attended class high: 0 = no, 1 = yes
+```{r, echo = FALSE}
+datadiahigh1 <- data157 %>%
+  dplyr::select(ARECOVERY, AHIGH1) %>%
+  na.omit(ARECOVERY, AHIGH1) %>%
+  mutate (ahigh1= ifelse(AHIGH1 == 1, 0, 1))
+CrossTable(datadiahigh1$ARECOVERY, datadiahigh1$ahigh1, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+## ever driven to or from campus high: 0=no, 1=yes
+```{r, echo = FALSE}
+datadiahigh2 <- data157 %>%
+  dplyr::select(ARECOVERY, AHIGH2) %>%
+  na.omit(ARECOVERY, AHIGH2) %>%
+  mutate (ahigh2= ifelse(AHIGH2 == 1, 0, 1))
+CrossTable(datadiahigh2$ARECOVERY, datadiahigh2$ahigh2, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+# Mental Health
+## Mental health past year: 0= good-excellent or better, 1 = fair or worse
+```{r, echo = FALSE}
+datadiamhq1 <- data157 %>%
+  dplyr::select(ARECOVERY, AMHQ1) %>%
+  na.omit(ARECOVERY, AMHQ1) %>%
+  mutate (amhq1= ifelse(AMHQ1 <= 3, 0, 1))
+CrossTable(datadiamhq1$ARECOVERY, datadiamhq1$amhq1, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+## Mental health past month: 0= good-excellent or better, 1 = fair or worse
+```{r, echo = FALSE}
+datadiamhq2 <- data157 %>%
+  dplyr::select(ARECOVERY, AMHQ2) %>%
+  na.omit(ARECOVERY, AMHQ2) %>%
+  mutate (amhq2= ifelse(AMHQ2 <= 3, 0, 1))
+CrossTable(datadiamhq2$ARECOVERY, datadiamhq2$amhq2, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+# GAD
+## nervous, anxious, on edge past month: 0= several days, 1 = at least more than half the days
+```{r, echo = FALSE}
+datadiagad1 <- data157 %>%
+  dplyr::select(ARECOVERY, AGAD1) %>%
+  na.omit(ARECOVERY, AGAD1) %>%
+  mutate (agad1= ifelse(AGAD1 <=1, 0, 1))
+CrossTable(datadiagad1$ARECOVERY, datadiagad1$agad1, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+
+#Mosaic
+mosaic_agad1 <- datadiagad1 %>% #KEY POPULATION
+  select(ARECOVERY, agad1)   #Key VARIABLES
+mosaicplot(table(mosaic_agad1), shade = TRUE, las = 4)
+```
+
+\pagebreak
+## not able to sleep or control worrying past month: 0= several days, 1 = at least more than half the days
+```{r, echo = FALSE}
+datadiagad2 <- data157 %>%
+  dplyr::select(ARECOVERY, AGAD2) %>%
+  na.omit(ARECOVERY, AGAD2) %>%
+  mutate (agad2 = ifelse(AGAD2 <=1, 0, 1))
+CrossTable(datadiagad2$ARECOVERY, datadiagad2$agad2, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+# Depression
+## Little interest doing things past month: 0 = several days or less, 1 = at least half the days
+```{r, echo = FALSE}
+datadiaphq1 <- data157 %>%
+  dplyr::select(ARECOVERY, APHQ1) %>%
+  na.omit(ARECOVERY, APHQ1) %>%
+  mutate (aphq1 = ifelse(APHQ1 <=1, 0, 1))
+CrossTable(datadiaphq1$ARECOVERY, datadiaphq1$aphq1, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+
+\pagebreak
+## feeling down, depressed, or hopeless past month: 0 = not at all, 1= several days or more. 
+```{r, echo = FALSE}
+datadiaphq2 <- data157 %>%
+  dplyr::select(ARECOVERY, APHQ2) %>%
+  na.omit(ARECOVERY, APHQ2) %>%
+  mutate (aphq2 = ifelse(APHQ2 <=0, 0, 1))
+CrossTable(datadiaphq2$ARECOVERY, datadiaphq2$aphq2, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+
+```
+
+\pagebreak
+# SERVICES
+## NA's removed: 508 total, 50 in recovery
+## how often do you use services: 0= rarely/never, 1 = sometimes-often
+```{r, echo = FALSE}
+data_filtered<- data157 %>%
+  filter(ASERVICES1 <= 3) %>%
+  filter(ASERVICES2 <= 3) %>%
+  filter(ASERVICES3 <= 3) %>%
+  filter(ASERVICES4 <= 3) %>%
+  filter(ASERVICES5 <= 3) %>%
+  filter(ASERVICES6 <= 3) %>%
+  filter(ASERVICES7 <= 3) %>%
+  filter(ASERVICES8 <= 3) %>%
+  filter(ASERVICES9 <= 3) %>%
+  filter(ASERVICES10 <= 3) %>%
+  filter(ASERVICES11 <= 3)
+
+### how often do you use services: 0= rarely/never, 1 = sometimes-often
+datadiaservices1 <- data_filtered %>%
+  dplyr::select(ARECOVERY, ASERVICES1) %>%
+  na.omit(ARECOVERY, ASERVICES1) %>%
+  mutate (aservices1 = ifelse(ASERVICES1 <=2, 1, 0))
+CrossTable(datadiaservices1$ARECOVERY, datadiaservices1$aservices1, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+## how often do you use services: 0= rarely/never, 1 = sometimes-often
+```{r, echo = FALSE}
+datadiaservices2 <- data_filtered %>%
+  dplyr::select(ARECOVERY, ASERVICES2) %>%
+  na.omit(ARECOVERY, ASERVICES2) %>%
+  mutate (aservices2 = ifelse(ASERVICES2 <=2, 1, 0))
+CrossTable(datadiaservices2$ARECOVERY, datadiaservices2$aservices2, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+## how often do you use services: 0= rarely/never, 1 = sometimes-often
+```{r, echo = FALSE}
+datadiaservices3 <- data_filtered %>%
+  dplyr::select(ARECOVERY, ASERVICES3) %>%
+  na.omit(ARECOVERY, ASERVICES3) %>%
+  mutate (aservices3 = ifelse(ASERVICES3 <=2, 1, 0))
+CrossTable(datadiaservices3$ARECOVERY, datadiaservices3$aservices3, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+# Not many access this service
+```
+\pagebreak
+
+## how often do you use services: 0= rarely/never, 1 = sometimes-often
+```{r, echo = FALSE}
+datadiaservices4 <- data_filtered %>%
+  dplyr::select(ARECOVERY, ASERVICES4) %>%
+  na.omit(ARECOVERY, ASERVICES4) %>%
+  mutate (aservices4 = ifelse(ASERVICES4 <=2, 1, 0))
+CrossTable(datadiaservices4$ARECOVERY, datadiaservices4$aservices4, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+
+```
+\pagebreak
+
+## how often do you use services: 0= rarely/never, 1 = sometimes-often
+```{r, echo = FALSE}
+datadiaservices5 <- data_filtered %>%
+  dplyr::select(ARECOVERY, ASERVICES5) %>%
+  na.omit(ARECOVERY, ASERVICES5) %>%
+  mutate (aservices5 = ifelse(ASERVICES5 <=2, 1, 0))
+CrossTable(datadiaservices5$ARECOVERY, datadiaservices5$aservices5, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+## how often do you use services: 0= rarely/never, 1 = sometimes-often
+```{r, echo = FALSE}
+datadiaservices6 <- data_filtered %>%
+  dplyr::select(ARECOVERY, ASERVICES6) %>%
+  na.omit(ARECOVERY, ASERVICES6) %>%
+  mutate (aservices6 = ifelse(ASERVICES6 <=2, 1, 0))
+CrossTable(datadiaservices6$ARECOVERY, datadiaservices6$aservices6, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+## how often do you use services: 0= rarely/never, 1 = sometimes-often
+```{r, echo = FALSE}
+datadiaservices7 <- data_filtered %>%
+  dplyr::select(ARECOVERY, ASERVICES7) %>%
+  na.omit(ARECOVERY, ASERVICES7) %>%
+  mutate (aservices7 = ifelse(ASERVICES7 <=2, 1, 0))
+CrossTable(datadiaservices7$ARECOVERY, datadiaservices7$aservices7, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+
+```
+\pagebreak
+
+## how often do you use services: 0= rarely/never, 1 = sometimes-often
+```{r, echo = FALSE}
+datadiaservices8 <- data_filtered %>%
+  dplyr::select(ARECOVERY, ASERVICES8) %>%
+  na.omit(ARECOVERY, ASERVICES8) %>%
+  mutate (aservices8 = ifelse(ASERVICES8 <=2, 1, 0))
+CrossTable(datadiaservices8$ARECOVERY, datadiaservices8$aservices8, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+## how often do you use services: 0= rarely/never, 1 = sometimes-often
+```{r, echo = FALSE}
+datadiaservices9 <- data_filtered %>%
+  dplyr::select(ARECOVERY, ASERVICES9) %>%
+  na.omit(ARECOVERY, ASERVICES9) %>%
+  mutate (aservices9 = ifelse(ASERVICES9 <=2, 1, 0))
+CrossTable(datadiaservices9$ARECOVERY, datadiaservices9$aservices9, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+## how often do you use services: 0= rarely/never, 1 = sometimes-often
+```{r, echo = FALSE}
+datadiaservices10 <- data_filtered %>%
+  dplyr::select(ARECOVERY, ASERVICES10) %>%
+  na.omit(ARECOVERY, ASERVICES10) %>%
+  mutate (aservices10 = ifelse(ASERVICES10 <=2, 1, 0))
+CrossTable(datadiaservices10$ARECOVERY, datadiaservices10$aservices10, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+## how often do you use services: 0= rarely/never, 1 = sometimes-often
+```{r, echo = FALSE}
+datadiaservices11 <- data_filtered %>%
+  dplyr::select(ARECOVERY, ASERVICES11) %>%
+  na.omit(ARECOVERY, ASERVICES11) %>%
+  mutate (aservices11 = ifelse(ASERVICES11 <=2, 1, 0))
+CrossTable(datadiaservices11$ARECOVERY, datadiaservices11$aservices11, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+
+```
+\pagebreak
+
+## REASONS TO WITHDRAW: 0 = not likely, 1= at least somewhat likely
+```{r, echo = FALSE}
+datadiawithdraw1 <- data157 %>%
+  dplyr::select(ARECOVERY, AWITHDRAW1) %>%
+  na.omit(ARECOVERY, AWITHDRAW1) %>%
+  mutate (awithdraw1 = ifelse(AWITHDRAW1 <=0, 0, 1))
+CrossTable(datadiawithdraw1$ARECOVERY, datadiawithdraw1$awithdraw1, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+## REASONS TO WITHDRAW: 0 = not likely, 1= at least somewhat likely
+```{r, echo = FALSE}
+
+datadiawithdraw2 <- data157 %>%
+  dplyr::select(ARECOVERY, AWITHDRAW2) %>%
+  na.omit(ARECOVERY, AWITHDRAW2) %>%
+  mutate (awithdraw2 = ifelse(AWITHDRAW2 <=0, 0, 1))
+CrossTable(datadiawithdraw2$ARECOVERY, datadiawithdraw2$awithdraw2, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+## REASONS TO WITHDRAW: 0 = not likely, 1= at least somewhat likely
+```{r, echo = FALSE}
+datadiawithdraw3 <- data157 %>%
+  dplyr::select(ARECOVERY, AWITHDRAW3) %>%
+  na.omit(ARECOVERY, AWITHDRAW3) %>%
+  mutate (awithdraw3 = ifelse(AWITHDRAW3 <=0, 0, 1))
+CrossTable(datadiawithdraw3$ARECOVERY, datadiawithdraw3$awithdraw3, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+
+```
+\pagebreak
+
+## REASONS TO WITHDRAW: 0 = not likely, 1= at least somewhat likely
+```{r, echo = FALSE}
+datadiawithdraw4 <- data157 %>%
+  dplyr::select(ARECOVERY, AWITHDRAW4) %>%
+  na.omit(ARECOVERY, AWITHDRAW4) %>%
+  mutate (awithdraw4 = ifelse(AWITHDRAW4 <=0, 0, 1))
+CrossTable(datadiawithdraw4$ARECOVERY, datadiawithdraw4$awithdraw4, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+
+```
+\pagebreak
+
+## REASONS TO WITHDRAW: 0 = not likely, 1= at least somewhat likely
+```{r, echo = FALSE}
+datadiawithdraw5 <- data157 %>%
+  dplyr::select(ARECOVERY, AWITHDRAW5) %>%
+  na.omit(ARECOVERY, AWITHDRAW5) %>%
+  mutate (awithdraw5 = ifelse(AWITHDRAW5 <=0, 0, 1))
+CrossTable(datadiawithdraw5$ARECOVERY, datadiawithdraw5$awithdraw5, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+```
+\pagebreak
+
+## REASONS TO WITHDRAW: 0 = not likely, 1= at least somewhat likely
+```{r, echo = FALSE}
+datadiawithdraw6 <- data157 %>%
+  dplyr::select(ARECOVERY, AWITHDRAW6) %>%
+  na.omit(ARECOVERY, AWITHDRAW6) %>%
+  mutate (awithdraw6 = ifelse(AWITHDRAW6 <=0, 0, 1))
+CrossTable(datadiawithdraw6$ARECOVERY, datadiawithdraw6$awithdraw6, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+
+```
+\pagebreak
+
+## REASONS TO WITHDRAW: 0 = not likely, 1= at least somewhat likely
+```{r, echo = FALSE}
+datadiawithdraw7 <- data157 %>%
+  dplyr::select(ARECOVERY, AWITHDRAW7) %>%
+  na.omit(ARECOVERY, AWITHDRAW7) %>%
+  mutate (awithdraw7 = ifelse(AWITHDRAW7 <=0, 0, 1))
+CrossTable(datadiawithdraw7$ARECOVERY, datadiawithdraw7$awithdraw7, prop.c =FALSE, prop.chisq=FALSE, chisq=TRUE)
+
+```
